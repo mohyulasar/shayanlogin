@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
+import Home from './components/Home';
+import AboutUs from './components/AboutUs';
+import Todoapp from './components/Todoapp';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navbar color="light" light expand="md">
+       <NavbarBrand><Link to='/'>Home</Link></NavbarBrand> 
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <NavLink> <Link to='/todoapp'>TodoApp</Link> </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink><Link to="/about">About Us</Link></NavLink>
+          </NavItem>
+        </Nav>
+      </Navbar>
+
+      <Route path="/" exact component={Home} />
+      <Route path="/todoapp" component={Todoapp} />
+      <Route path="/about" component={AboutUs} />
+      <Route exact path="/dashboard" render={() => {window.location.href="http://127.0.0.1:8887/"}} />
+    </BrowserRouter>
   );
 }
 
